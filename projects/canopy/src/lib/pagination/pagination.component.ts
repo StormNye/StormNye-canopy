@@ -81,7 +81,15 @@ export class LgPaginationComponent implements OnChanges {
   }
 
   get pages() {
-    return [ ...Array(this.numPages).keys() ].map(x => x + 1);
+    const pagesToFit = Math.floor(document.documentElement.clientWidth / 200);
+    const bufferedCurrentPage = Math.max(
+      Math.min(this.currentPage, this.numPages - pagesToFit),
+      pagesToFit + 1,
+    );
+
+    return [ ...Array(this.numPages).keys() ]
+      .map(x => x + 1)
+      .filter(x => Math.abs(x - bufferedCurrentPage) <= pagesToFit);
   }
 
   get label() {

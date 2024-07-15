@@ -1,5 +1,16 @@
 <ng-container *ngIf="pages.length > 1">
   <ul>
+    <li *ngIf="pages.length < numPages">
+      <button
+        type="button"
+        class="lg-pagination__button lg-pagination__button--prevnext"
+        aria-label="Go to first page"
+        (click)="goTo(1)"
+        [disabled]="currentPage === 1"
+      >
+        <lg-icon name="goto-first"></lg-icon>
+      </button>
+    </li>
     <li>
       <button
         type="button"
@@ -34,6 +45,17 @@
         [disabled]="currentPage === numPages"
       >
         <lg-icon name="chevron-right"></lg-icon>
+      </button>
+    </li>
+    <li *ngIf="pages.length < numPages">
+      <button
+        type="button"
+        class="lg-pagination__button lg-pagination__button--prevnext"
+        aria-label="Go to last page"
+        (click)="goTo(numPages)"
+        [disabled]="currentPage === numPages"
+      >
+        <lg-icon name="goto-last"></lg-icon>
       </button>
     </li>
   </ul>

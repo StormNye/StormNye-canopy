@@ -81,7 +81,14 @@ export class LgPaginationComponent implements OnChanges {
   }
 
   get pages() {
-    const pagesToFit = Math.floor(document.documentElement.clientWidth / 200);
+    const iconWidth =
+      parseInt(
+        getComputedStyle(document.documentElement).getPropertyValue('--text-base-size'),
+      ) * 3.25;
+    const chevronButtonsWidth = 4 * iconWidth;
+    const pagesToFit = Math.floor(
+      (document.documentElement.clientWidth - chevronButtonsWidth) / iconWidth / 2,
+    );
     const bufferedCurrentPage = Math.max(
       Math.min(this.currentPage, this.numPages - pagesToFit),
       pagesToFit + 1,
